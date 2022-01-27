@@ -1,0 +1,315 @@
+{
+    "configurations": [
+        {
+            "name": "Start ayudaembarcaciones",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "cwd": "${workspaceFolder}/ayudaembarcaciones",
+            "windows": {
+                "runtimeExecutable": "npm.cmd"
+            },
+            "runtimeArgs": [
+                "run-script",
+                "start"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "port": 9229,
+            "env": {
+                "DEBUG": "--inspect"
+            }
+        },
+        {
+            "name": "Start ayudaembarcaciones with UI5 Version",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "cwd": "${workspaceFolder}/ayudaembarcaciones",
+            "windows": {
+                "runtimeExecutable": "npm.cmd"
+            },
+            "runtimeArgs": [
+                "run-script",
+                "start"
+            ],
+            "args": [
+                "--",
+                "${input:UI5Version}"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "port": 9229,
+            "env": {
+                "DEBUG": "--inspect"
+            }
+        },
+        {
+            "name": "Start ayudaembarcaciones Mock",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/ayudaembarcaciones",
+            "runtimeExecutable": "npm",
+            "windows": {
+                "runtimeExecutable": "npm.cmd"
+            },
+            "runtimeArgs": [
+                "run-script",
+                "start-mock"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "port": 9229,
+            "env": {}
+        },
+        {
+            "name": "Start ayudaembarcaciones Mock with UI5 Version",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/ayudaembarcaciones",
+            "runtimeExecutable": "npm",
+            "windows": {
+                "runtimeExecutable": "npm.cmd"
+            },
+            "runtimeArgs": [
+                "run-script",
+                "start-mock"
+            ],
+            "args": [
+                "--",
+                "${input:UI5Version}"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "port": 9229
+        },
+        {
+            "name": "Start ayudaembarcaciones Local",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/ayudaembarcaciones",
+            "runtimeExecutable": "npm",
+            "windows": {
+                "runtimeExecutable": "npm.cmd"
+            },
+            "runtimeArgs": [
+                "run-script",
+                "start-local"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "port": 9229,
+            "env": {}
+        },
+        {
+            "name": "Start busqtemporada",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "cwd": "${workspaceFolder}/busqtemporada",
+            "windows": {
+                "runtimeExecutable": "npm.cmd"
+            },
+            "runtimeArgs": [
+                "run-script",
+                "start"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "port": 9229,
+            "env": {
+                "DEBUG": "--inspect"
+            }
+        },
+        {
+            "name": "Start busqtemporada with UI5 Version",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "cwd": "${workspaceFolder}/busqtemporada",
+            "windows": {
+                "runtimeExecutable": "npm.cmd"
+            },
+            "runtimeArgs": [
+                "run-script",
+                "start"
+            ],
+            "args": [
+                "--",
+                "${input:UI5Version}"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "port": 9229,
+            "env": {
+                "DEBUG": "--inspect"
+            }
+        },
+        {
+            "name": "Start busqtemporada Mock",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/busqtemporada",
+            "runtimeExecutable": "npm",
+            "windows": {
+                "runtimeExecutable": "npm.cmd"
+            },
+            "runtimeArgs": [
+                "run-script",
+                "start-mock"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "port": 9229,
+            "env": {}
+        },
+        {
+            "name": "Start busqtemporada Mock with UI5 Version",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/busqtemporada",
+            "runtimeExecutable": "npm",
+            "windows": {
+                "runtimeExecutable": "npm.cmd"
+            },
+            "runtimeArgs": [
+                "run-script",
+                "start-mock"
+            ],
+            "args": [
+                "--",
+                "${input:UI5Version}"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "port": 9229
+        },
+        {
+            "name": "Start busqtemporada Local",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/busqtemporada",
+            "runtimeExecutable": "npm",
+            "windows": {
+                "runtimeExecutable": "npm.cmd"
+            },
+            "runtimeArgs": [
+                "run-script",
+                "start-local"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "port": 9229,
+            "env": {}
+        },
+        {
+            "name": "Start busqarmadores",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "cwd": "${workspaceFolder}/busqarmadores",
+            "windows": {
+                "runtimeExecutable": "npm.cmd"
+            },
+            "runtimeArgs": [
+                "run-script",
+                "start"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "port": 9229,
+            "env": {
+                "DEBUG": "--inspect"
+            }
+        },
+        {
+            "name": "Start busqarmadores with UI5 Version",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "cwd": "${workspaceFolder}/busqarmadores",
+            "windows": {
+                "runtimeExecutable": "npm.cmd"
+            },
+            "runtimeArgs": [
+                "run-script",
+                "start"
+            ],
+            "args": [
+                "--",
+                "${input:UI5Version}"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "port": 9229,
+            "env": {
+                "DEBUG": "--inspect"
+            }
+        },
+        {
+            "name": "Start busqarmadores Mock",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/busqarmadores",
+            "runtimeExecutable": "npm",
+            "windows": {
+                "runtimeExecutable": "npm.cmd"
+            },
+            "runtimeArgs": [
+                "run-script",
+                "start-mock"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "port": 9229,
+            "env": {}
+        },
+        {
+            "name": "Start busqarmadores Mock with UI5 Version",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/busqarmadores",
+            "runtimeExecutable": "npm",
+            "windows": {
+                "runtimeExecutable": "npm.cmd"
+            },
+            "runtimeArgs": [
+                "run-script",
+                "start-mock"
+            ],
+            "args": [
+                "--",
+                "${input:UI5Version}"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "port": 9229
+        },
+        {
+            "name": "Start busqarmadores Local",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/busqarmadores",
+            "runtimeExecutable": "npm",
+            "windows": {
+                "runtimeExecutable": "npm.cmd"
+            },
+            "runtimeArgs": [
+                "run-script",
+                "start-local"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "port": 9229,
+            "env": {}
+        }
+    ],
+    "compounds": [],
+    "inputs": [
+        {
+            "id": "UI5Version",
+            "type": "command",
+            "command": "sap.ux.appGenerator.ui5Version"
+        }
+    ]
+}

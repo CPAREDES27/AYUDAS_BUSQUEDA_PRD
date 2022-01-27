@@ -1,0 +1,149 @@
+_schema-version: "3.2"
+ID: AyudasBusqueda
+description: Repositorio para ayudas de busqueda
+version: 0.0.1
+modules:
+- name: AyudasBusqueda-dest-content
+  type: com.sap.application.content
+  requires:
+  - name: AyudasBusqueda-dest-srv
+    parameters:
+      content-target: true
+  - name: AyudasBusqueda-repo-host
+    parameters:
+      service-key:
+        name: AyudasBusqueda-repo-host-key
+  - name: AyudasBusqueda-uaa
+    parameters:
+      service-key:
+        name: AyudasBusqueda-uaa-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: AyudasBusqueda_repo_host
+          ServiceInstanceName: AyudasBusqueda-html5-srv
+          ServiceKeyName: AyudasBusqueda-repo-host-key
+          sap.cloud.service: AyudasBusqueda
+        - Authentication: OAuth2UserTokenExchange
+          Name: AyudasBusqueda_uaa
+          ServiceInstanceName: AyudasBusqueda-xsuaa-srv
+          ServiceKeyName: AyudasBusqueda-uaa-key
+          sap.cloud.service: AyudasBusqueda
+        existing_destinations_policy: update
+  build-parameters:
+    no-source: true
+- name: AyudasBusqueda-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: AyudasBusqueda-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - busqembarcaciones.zip
+      name: busqembarcaciones
+      target-path: resources/
+    - artifacts:
+      - busqtemporada.zip
+      name: busqtemporada
+      target-path: resources/
+    - artifacts:
+      - busqarmadores.zip
+      name: busqarmadores
+      target-path: resources/
+    - artifacts:
+      - busqtripulantes.zip
+      name: busqtripulantes
+      target-path: resources/
+    - artifacts:
+      - busqsemana.zip
+      name: busqsemana
+      target-path: resources/
+- name: busqembarcaciones
+  type: html5
+  path: busqembarcaciones
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: busqtemporada
+  type: html5
+  path: busqtemporada
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: busqarmadores
+  type: html5
+  path: busqarmadores
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: busqtripulantes
+  type: html5
+  path: busqtripulantes
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: busqsemana
+  type: html5
+  path: busqsemana
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: AyudasBusqueda-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: AyudasBusqueda-xsuaa-srv
+    service-plan: application
+- name: AyudasBusqueda-dest-srv
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: AyudasBusqueda-dest-srv
+    service-plan: lite
+- name: AyudasBusqueda-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: AyudasBusqueda-html5-srv
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo

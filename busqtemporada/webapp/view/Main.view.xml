@@ -1,0 +1,121 @@
+<mvc:View
+    controllerName="busqtemporada.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+	xmlns:form = "sap.ui.layout.form"
+    displayBlock="true"
+    xmlns="sap.m">
+	<form:Form 
+		binding="{/form}" 
+		width="100%" 
+		editable="true">
+		<form:formContainers>
+			<form:FormContainer>
+				<form:formElements>
+					<form:FormElement label="Cod. Puerto">
+						<form:fields>
+							<Input value="{CDPCN}" submit="keyPress" maxLength="10"/>
+						</form:fields>
+					</form:FormElement>
+				</form:formElements>
+			</form:FormContainer>
+			<form:FormContainer>
+				<form:formElements>
+					<form:FormElement label="Descripción">
+						<form:fields>
+							<Input value="{DSPCN}" submit="keyPress"/>
+						</form:fields>
+					</form:FormElement>
+				</form:formElements>
+			</form:FormContainer>
+			<form:FormContainer>
+				<form:formElements>
+					<form:FormElement>
+						<form:fields>
+							<Button 
+								text="Buscar" 
+								icon="sap-icon://search" 
+								type="Emphasized" 
+								press="onPressSearching" />
+							<Button text="Limpiar" icon="sap-icon://clear-filter" type="Ghost" press="onCleanSearh" />
+						</form:fields>
+					</form:FormElement>
+				</form:formElements>
+			</form:FormContainer>
+		</form:formContainers>
+		<form:layout>
+			<form:ResponsiveGridLayout
+				adjustLabelSpan="true"
+				breakpointL="1024"
+				breakpointM="600"
+				breakpointXL="1440"
+				columnsL="3"
+				columnsM="3"
+				columnsXL="-1"
+				emptySpanL="0"
+				emptySpanM="0"
+				emptySpanS="0"
+				emptySpanXL="-1"
+				labelSpanL="4"
+				labelSpanM="4"
+				labelSpanS="12"
+				labelSpanXL="-1"
+				singleContainerFullSize="true"/>
+		</form:layout>
+	</form:Form>
+	
+	<Table  id="HelpTable"	
+			items="{/tempList}"
+			fixedLayout="false"
+			growing="false"
+			growingScrollToLoad="false"
+			growingThreshold="50"
+			updateFinished="onUpdateTable">
+		<headerToolbar>
+			<OverflowToolbar>
+				<Title text="{/tableTitle}" level="H3"/>
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column width="15rem" >
+				<Label text="Código" />
+			</Column>
+			<Column width="25rem" demandPopin="true" minScreenWidth="Tablet">
+				<Label text="Descripción" />
+			</Column>
+			<Column width="15rem" demandPopin="true" minScreenWidth="Tablet">
+				<Label text="Fecha inicio" />
+			</Column>
+			<Column width="15rem" demandPopin="true" minScreenWidth="Tablet">
+				<Label text="Fecha fin" />
+			</Column>
+			<Column hAlign="End" width="15rem" demandPopin="true" minScreenWidth="Tablet">
+				<Label text="Cuota" />
+			</Column>
+			<Column width="20rem" demandPopin="true" minScreenWidth="Tablet">
+				<Label text="Zona" />
+			</Column>
+
+		</columns>
+		<items>
+			<ColumnListItem
+				type="Active"
+				press="onSelectItem">
+				<ObjectStatus 
+					text="{CDPCN}"
+					state="Information" />
+				<Text text="{DSPCN}" />
+				<Text text="{ path: 'FHITM'}" />
+				<Text text="{ path: 'FHFTM'}" />
+				<Text text="{
+								path:'CTNAC',
+								type:'sap.ui.model.type.Integer',
+								formatOptions:{
+									groupingEnabled:true,
+									groupingSeparator:','
+								}
+							}" />
+				<Text text="{ZDSZAR}" />
+			</ColumnListItem>
+		</items>
+	</Table> 
+</mvc:View>

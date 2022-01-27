@@ -1,0 +1,133 @@
+<mvc:View
+    controllerName="busqsemana.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+	xmlns:form = "sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+    displayBlock="true"
+    xmlns="sap.m">
+	<VBox >
+		<items >
+			<form:Form 
+				binding="{/searchEmbar}" 
+				width="100%" 
+				editable="true">
+				<form:formContainers>
+					<form:FormContainer>
+						<form:formElements>
+							<form:FormElement>
+								<form:fields>
+									<ComboBox id="idAnio" selectionChange="changeAnio" selectedKey="1" items="{Anio>/listaAnio}" editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%">
+                                        <items>
+                                            <core:Item text="{Anio>anio}" enabled="true" key="{Anio>id}"/>
+                                        </items>
+                                    </ComboBox>
+								</form:fields>
+								<form:label>
+									<Label text="Código" />
+								</form:label>
+							</form:FormElement>
+						</form:formElements>
+					</form:FormContainer>
+
+
+				</form:formContainers>
+				<form:layout>
+					<form:ResponsiveGridLayout
+						adjustLabelSpan="false"
+						columnsM="2"/>
+					<!-- <form:ResponsiveGridLayout
+						adjustLabelSpan="true"
+						breakpointL="1024"
+						breakpointM="600"
+						breakpointXL="1440"
+						columnsL="2"
+						columnsM="2"
+						columnsXL="-1"
+						emptySpanL="0"
+						emptySpanM="0"
+						emptySpanS="0"
+						emptySpanXL="-1"
+						labelSpanL="4"
+						labelSpanM="2"
+						labelSpanS="12"
+						labelSpanXL="-1"
+						singleContainerFullSize="true"/> -->
+				</form:layout>
+			</form:Form>
+			<ScrollContainer
+				height="50vh" vertical="true">
+				 <Table id="idProductsTable"
+                
+		inset="false"
+		items="{
+			path: '/listaSemana',
+			sorter: {
+				path: 'Name'
+			}
+		}">
+		<headerToolbar>
+			<OverflowToolbar>
+				<content>
+					<Title text="Lista de registros" id="idListaArmador" level="H2"/>
+					<ToolbarSpacer />
+				</content>
+			</OverflowToolbar>
+		</headerToolbar>
+		
+		<columns>
+			<Column mergeDuplicates="true"
+				width="12em">
+				<Text text="Mes" />
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true">
+				<Text text="Semana" />
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true">
+				<Text text="Del" />
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true">
+				<Text text="Al" />
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true">
+				<Text text="Días" />
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem press="onSelectItem"  type="Active">
+				<cells>
+					<ObjectIdentifier
+						text="{MES}"/>
+				</cells>
+                <cells>
+					<ObjectIdentifier
+						text="Semana {PABRP}"/>
+				</cells>
+                <cells>
+					<ObjectIdentifier
+						text="{BEGDA}"/>
+				</cells>
+                <cells>
+					<ObjectIdentifier
+						text="{ENDDA}"/>
+				</cells>
+                 <cells>
+					<ObjectIdentifier
+						text="{DIFER}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+        
+        
+	</Table>     
+			</ScrollContainer>
+		</items>
+	</VBox>
+</mvc:View>

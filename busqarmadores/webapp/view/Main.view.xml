@@ -1,0 +1,126 @@
+<mvc:View
+    controllerName="busqarmadores.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+	xmlns:core = "sap.ui.core"
+	xmlns:form = "sap.ui.layout.form">
+	<VBox >
+		<items >
+			<form:Form 
+				binding="{/searchArma}" 
+				width="100%" 
+				editable="true">
+				<form:formContainers>
+					<form:FormContainer>
+						<form:formElements>
+							<form:FormElement label="Nro cliente">
+								<form:fields>
+									<Input id="idNroCliente" submit="keyPress" value="{LIFNR}" maxLength="10"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement label="Descripción">
+								<form:fields>
+									<Input id="idDescripcion" submit="keyPress" value="{NAME1}" />
+								</form:fields>
+							</form:FormElement>
+							
+						</form:formElements>
+					</form:FormContainer>
+
+					<form:FormContainer>
+						<form:formElements>
+								<form:FormElement label="R.U.C.">
+								<form:fields>
+									<Input id="idRuc" value="{STCD1}" submit="keyPress" />
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement label="Cant. de aciertos">
+								<form:fields>
+									<Input id="idCantidad" value="200" submit="keyPress" />
+								</form:fields>
+							</form:FormElement>
+								<form:FormElement>
+								<form:fields>
+									<Button text="Buscar" icon="sap-icon://search" type="Emphasized" press="onPressSearching" />
+									<Button text="Limpiar" icon="sap-icon://clear-filter" type="Ghost" press="onCleanSearh" />
+								</form:fields>
+								<form:label>
+									<Label text=""/>
+								</form:label>
+							</form:FormElement>
+						</form:formElements>
+					</form:FormContainer>
+
+					<form:FormContainer>
+						<form:formElements>
+						
+						</form:formElements>
+					</form:FormContainer>
+				</form:formContainers>
+				<form:layout>
+					<form:ResponsiveGridLayout
+						adjustLabelSpan="false"
+						columnsM="2"/>
+					<!-- <form:ResponsiveGridLayout
+						adjustLabelSpan="true"
+						breakpointL="1024"
+						breakpointM="600"
+						breakpointXL="1440"
+						columnsL="2"
+						columnsM="2"
+						columnsXL="-1"
+						emptySpanL="0"
+						emptySpanM="0"
+						emptySpanS="0"
+						emptySpanXL="-1"
+						labelSpanL="4"
+						labelSpanM="2"
+						labelSpanS="12"
+						labelSpanXL="-1"
+						singleContainerFullSize="true"/> -->
+				</form:layout>
+			</form:Form>
+			<ScrollContainer
+				height="50vh" vertical="true">
+				<Table  id="HelpTable"
+						items="{/tempList}"
+						growing="false"
+						growingScrollToLoad="false"
+						growingThreshold="50"
+						updateFinished="onUpdateTable">
+					<headerToolbar>
+						<OverflowToolbar>
+							<ObjectStatus id="idCantReg"
+								text="Cantidad de Registros: " 
+								state="Warning"/>
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+						<Column>
+							<Label text="Nro. cuenta del proveedor" />
+						</Column>
+						<Column>
+							<Label text="Descripción" />
+						</Column>
+						<Column>
+							<Label text="R.U.C" />
+						</Column>
+						
+					</columns>
+					<items>
+						<ColumnListItem
+							type="Active"
+							press="onSelectItem">
+							<cells>
+								<Text text="{LIFNR}" />
+								<Text text="{NAME1}" />
+								<Text text="{STCD1}" />
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>         
+			</ScrollContainer>
+		</items>
+	</VBox>
+</mvc:View>
