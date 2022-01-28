@@ -106,6 +106,8 @@ sap.ui.define([
 				// Modelo con nombre
 				oModel.setProperty("/DatosGenerales/CDEMP",oContext.getProperty("LIFNR"));
 				oModel.setProperty("/DatosGenerales/NAME1",oContext.getProperty("NAME1"));
+				oModel.setProperty("/Cabecera/CDEMP",oContext.getProperty("LIFNR"));
+				oModel.setProperty("/Cabecera/NAME1",oContext.getProperty("NAME1"));
 				// console.log(helpArma);
 				oModel.setProperty("/helpArma",helpArma);
 				if(sId.split("_")[1] === "R"){

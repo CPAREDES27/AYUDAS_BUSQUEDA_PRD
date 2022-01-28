@@ -51,13 +51,16 @@ sap.ui.define([
 				oModel.setProperty(`/help`,help);
 
 				// Modelo con nombre
-				oModel.setProperty("/DatosGenerales/CDEMP",oContext.getProperty("CDEMB"));
+				oModel.setProperty("/DatosGenerales/CDEMB",oContext.getProperty("CDEMB"));
 				oModel.setProperty("/DatosGenerales/NAME1",oContext.getProperty("CDEMP"));
 				oModel.setProperty("/DatosGenerales/CDEMP",oContext.getProperty("MREMB"));
 				oModel.setProperty("/DatosGenerales/NAME1",oContext.getProperty("WERKS"));
 				oModel.setProperty("/DatosGenerales/CDEMP",oContext.getProperty("KUNNR"));
 				oModel.setProperty("/DatosGenerales/NAME1",oContext.getProperty("NAME1"));
 				oModel.setProperty("/DatosGenerales/CDEMP",oContext.getProperty("INPRP"));
+				oModel.setProperty("/DatosGenerales/NMEMB",oContext.getProperty("NMEMB"));
+
+				oModel.setProperty("/EmbaItem",oContext.getObject());
 
 				if(sId.split("_")[1] === "W"){
 					oInput.setValue(help.WERKS)
