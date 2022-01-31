@@ -12,7 +12,7 @@ sap.ui.define([
 			onInit: function () {
 				let oModel = this.getOwnerComponent()._getPropertiesToPropagate().oModels.undefined;
 				if(!oModel){   // para caso 
-					oModel = this.getOwnerComponent()._getPropertiesToPropagate().oModels.DetalleMarea;
+					oModel = this.getOwnerComponent()._getPropertiesToPropagate().oModels.Form;
 				}
 				// let oModel = new sap.ui.model.json.JSONModel();
 				this.getView().setModel(oModel);
@@ -95,7 +95,6 @@ sap.ui.define([
 				let oContext = oEvent.getSource().getBindingContext(),
 				oModel = oContext.getModel(),
 				helpArma = oModel.getProperty("/helpArma")||{},
-				DatosGenerales = oModel.getProperty("/DatosGenerales"),
 				oInput = oModel.getProperty("/input"),
 				sId = oInput.getId();
 				
@@ -104,10 +103,10 @@ sap.ui.define([
 				helpArma.STCD1 = oContext.getProperty("STCD1");
 
 				// Modelo con nombre
-				oModel.setProperty("/DatosGenerales/CDEMP",oContext.getProperty("LIFNR"));
-				oModel.setProperty("/DatosGenerales/NAME1",oContext.getProperty("NAME1"));
-				oModel.setProperty("/Cabecera/CDEMP",oContext.getProperty("LIFNR"));
-				oModel.setProperty("/Cabecera/NAME1",oContext.getProperty("NAME1"));
+				oModel.setProperty("/Form/CDEMP",oContext.getProperty("LIFNR"));
+				oModel.setProperty("/Form/NAME1",oContext.getProperty("NAME1"));
+				oModel.setProperty("/Form/CDEMP",oContext.getProperty("LIFNR"));
+				oModel.setProperty("/Form/NAME1",oContext.getProperty("NAME1"));
 				// console.log(helpArma);
 				oModel.setProperty("/helpArma",helpArma);
 				if(sId.split("_")[1] === "R"){
