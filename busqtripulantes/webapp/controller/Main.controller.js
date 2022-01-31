@@ -1,11 +1,13 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/ui/core/BusyIndicator"
+	"sap/ui/core/BusyIndicator",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
 ],
 	/**
 	 * @param {typeof sap.ui.core.mvc.Controller} Controller
 	 */
-	function (Controller,BusyIndicator) {
+	function (Controller,BusyIndicator,Filter,FilterOperator) {
 		"use strict";
 		
 		return Controller.extend("busqtripulantes.controller.Main", {
@@ -115,7 +117,7 @@ sap.ui.define([
 					option : [],
 					options : aOptions,
 					order : "",
-					p_user : oUser.name,
+					p_user : "FGARCIA",
 					rowcount : idCantidad,
 					rowskips : 0,
 					tabla : "ZHRP_BD_PERSONAL"
@@ -134,7 +136,8 @@ sap.ui.define([
 					if(oGetTemp.status===200){
 						let oData = await oGetTemp.json(),
 						aData = oData["data"];
-						oModel.setProperty("/tempList",aData);
+						this.byId("idCantReg").setText("Lista de registros: " + aData.length);
+						oModel.setProperty("/tempList",aData);1
 					}
 					BusyIndicator.hide();
 				} catch (error) {
@@ -162,5 +165,25 @@ sap.ui.define([
 	
 				return `https://cf-nodejs-${servicioNode}.cfapps.us10.hana.ondemand.com`;
 			},
+			onSearch: function (oEvent) {
+				// add filter for search
+				var aFilters = [];
+				var sQuery = oEvent.getSource().getValue();
+				if (sQuery && sQuery.length > 0) {
+					var filter = new Filter([
+						new Filter("PERNR", FilterOperator.Contains, sQuery),
+						new Filter("VORNA", FilterOperator.Contains, sQuery),
+						new Filter("NACHN", FilterOperator.Contains, sQuery),
+						new Filter("NACH2", FilterOperator.Contains, sQuery),
+						new Filter("STELL", FilterOperator.Contains, sQuery)
+					]);
+					aFilters.push(filter);
+				}
+	
+				// update list binding
+				var oList = this.byId("table");
+				var oBinding = oList.getBinding("rows");
+				oBinding.filter(aFilters, "Application");
+			}
 		});
 	});

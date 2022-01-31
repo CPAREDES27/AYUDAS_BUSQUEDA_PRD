@@ -1,12 +1,14 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/ui/core/BusyIndicator"
+	"sap/ui/core/BusyIndicator",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
 ],
 	/**
 	 * @param {typeof sap.ui.core.mvc.Controller} Controller
 	 */
 	function (Controller,
-	BusyIndicator) {
+	BusyIndicator,Filter,FilterOperator) {
 		"use strict";
 
 		return Controller.extend("busqtemporada.controller.Main", {
@@ -73,7 +75,7 @@ sap.ui.define([
 					option : [],
 					options : aOptions,
 					order : "CDPCN DESCENDING",
-					p_user : oUser.name,
+					p_user : "FGARCIA",
 					rowcount : 0,
 					rowskips : 0,
 					tabla : "ZV_FLTZ"
@@ -159,5 +161,27 @@ sap.ui.define([
 	
 				return `https://cf-nodejs-${servicioNode}.cfapps.us10.hana.ondemand.com`;
 			},
+
+			onSearch: function (oEvent) {
+				// add filter for search
+				var aFilters = [];
+				var sQuery = oEvent.getSource().getValue();
+				if (sQuery && sQuery.length > 0) {
+					var filter = new Filter([
+						new Filter("CDPCN", FilterOperator.Contains, sQuery),
+						new Filter("DSPCN", FilterOperator.Contains, sQuery),
+						new Filter("FHITM", FilterOperator.Contains, sQuery),
+						new Filter("FHFTM", FilterOperator.Contains, sQuery),
+						new Filter("CTNAC", FilterOperator.Contains, sQuery)
+					]);
+					aFilters.push(filter);
+				}
+	
+				// update list binding
+				var oList = this.byId("table");
+				var oBinding = oList.getBinding("rows");
+				oBinding.filter(aFilters, "Application");
+			}
+
 		});
 	});

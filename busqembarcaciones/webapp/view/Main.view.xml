@@ -4,7 +4,8 @@
 	xmlns:form = "sap.ui.layout.form"
 	xmlns:core="sap.ui.core"
     displayBlock="true"
-    xmlns="sap.m">
+    xmlns="sap.m"
+	xmlns:table="sap.ui.table">
 	<VBox >
 		<items >
 			<form:Form 
@@ -116,50 +117,115 @@
 			</form:Form>
 			<ScrollContainer
 				height="50vh" vertical="true">
-				<Table  id="HelpTable"
-						items="{/dataEmbarcaciones/data}"
-						growing="false"
-						growingScrollToLoad="false"
-						growingThreshold="50"
-						updateFinished="onUpdateTable">
-					<headerToolbar>
-						<OverflowToolbar>
-							<ObjectStatus
+				<table:Table   
+				id="table"
+				 
+                            rows="{/dataEmbarcaciones/data}"
+							selectionMode="Single"
+							selectionBehavior="Row"
+							rowSelectionChange="onSelectItem"	
+                             visibleRowCount="12"
+                            showColumnVisibilityMenu="{ui>/showVisibilityMenuEntry}"
+                            enableColumnFreeze="{ui>/showFreezeMenuEntry}"
+                            enableCellFilter="{ui>/enableCellFilter}"
+                            columnSelect="onColumnSelect"
+                            cellContextmenu="onProductIdCellContextMenu"
+                            ariaLabelledBy="title"
+							
+							>
+				<table:extension>
+					<OverflowToolbar style="Clear">
+						
+						<ObjectStatus
 								text="{/pageTable/text}" 
 								state="Warning"/>
-						</OverflowToolbar>
-					</headerToolbar>
-					<columns>
-						<Column>
-							<Label text="Cod. Embarcación" />
-						</Column>
-						<Column>
-							<Label text="Matrícula" />
-						</Column>
-						<Column>
-							<Label text="Nmb. Embarcación" />
-						</Column>
-						<Column>
-							<Label text="R.U.C. Armador" />
-						</Column>
-						<Column>
-							<Label text="Desc. Armador" />
-						</Column>
-					</columns>
-					<items>
-						<ColumnListItem
-							type="Active"
-							press="onSelectItem">
-							<cells>
-								<ObjectStatus text="{CDEMB}" state="Information" />
-								<Text text="{MREMB}" />
-								<Text text="{NMEMB}" />
-								<Text text="{STCD1}" />
-								<Text text="{NAME1}" />
-							</cells>
-						</ColumnListItem>
-					</items>
-				</Table>         
+						<ToolbarSpacer/>
+                          
+						<ToolbarSeparator/>
+						<SearchField
+							placeholder="Búsqueda rápida"
+							value="{ui>/globalFilter}"
+							liveChange="onSearch"
+							width="15rem"/>
+					</OverflowToolbar>
+					
+				</table:extension>
+				<table:columns  editable="false">
+					<table:Column width="8.5rem"
+						sortProperty="CDEMB"
+						filterProperty="CDEMB"
+						showFilterMenuEntry="true"
+						showSortMenuEntry="true">
+						<table:label>
+							<Label text="Cod. Embarcación"/>
+						</table:label>
+						<table:template>
+							<ObjectStatus text="{CDEMB}" state="Information" />
+						</table:template>
+					</table:Column>
+
+
+					<table:Column width="8rem"
+						sortProperty="MREMB"
+						filterProperty="MREMB"
+						showFilterMenuEntry="true"
+						showSortMenuEntry="true">
+						<table:label>
+							<Label text="Matrícula"/>
+						</table:label>
+						<table:template>
+							<Text text="{MREMB}"/>
+						</table:template>
+					</table:Column>
+
+
+					<table:Column width="14rem"
+						sortProperty="NMEMB"
+						filterProperty="NMEMB"
+						showFilterMenuEntry="true"
+						showSortMenuEntry="true">
+						<table:label>
+							<Label text="Nmb. Embarcación"/>
+						</table:label>
+						<table:template>
+							<Text text="{NMEMB}"/>
+						</table:template>
+					</table:Column>
+					
+					
+					<table:Column width="9rem"
+						sortProperty="STCD1"
+						filterProperty="STCD1"
+						showFilterMenuEntry="true"
+						showSortMenuEntry="true">
+						<table:label>
+							<Label text="R.U.C. Armador"/>
+						</table:label>
+						<table:template>
+							<Text text="{STCD1}"/>
+						</table:template>
+					</table:Column>
+					
+					
+					
+					<table:Column width="20rem"
+						sortProperty="NAME1"
+						filterProperty="NAME1"
+						showFilterMenuEntry="true"
+						showSortMenuEntry="true">
+						<table:label>
+							<Label text="Desc. Armador"/>
+						</table:label>
+						<table:template>
+							<Text text="{NAME1}"/>
+						</table:template>
+					</table:Column>
+					<!--EMBACACION-->
+				</table:columns>
+
+
+
+			</table:Table>         
 			</ScrollContainer>
 		</items>
 	</VBox>

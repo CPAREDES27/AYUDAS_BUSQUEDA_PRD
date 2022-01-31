@@ -3,7 +3,8 @@
     xmlns:mvc="sap.ui.core.mvc"
 	xmlns:form = "sap.ui.layout.form"
     displayBlock="true"
-    xmlns="sap.m">
+    xmlns="sap.m"
+	xmlns:table="sap.ui.table">
 	<form:Form 
 		binding="{/form}" 
 		width="100%" 
@@ -63,50 +64,107 @@
 		</form:layout>
 	</form:Form>
 	
-	<Table  id="HelpTable"	
-			items="{/tempList}"
-			fixedLayout="false"
-			growing="false"
-			growingScrollToLoad="false"
-			growingThreshold="50"
-			updateFinished="onUpdateTable">
-		<headerToolbar>
-			<OverflowToolbar>
-				<Title text="{/tableTitle}" level="H3"/>
-			</OverflowToolbar>
-		</headerToolbar>
-		<columns>
-			<Column width="15rem" >
-				<Label text="Código" />
-			</Column>
-			<Column width="25rem" demandPopin="true" minScreenWidth="Tablet">
-				<Label text="Descripción" />
-			</Column>
-			<Column width="15rem" demandPopin="true" minScreenWidth="Tablet">
-				<Label text="Fecha inicio" />
-			</Column>
-			<Column width="15rem" demandPopin="true" minScreenWidth="Tablet">
-				<Label text="Fecha fin" />
-			</Column>
-			<Column hAlign="End" width="15rem" demandPopin="true" minScreenWidth="Tablet">
-				<Label text="Cuota" />
-			</Column>
-			<Column width="20rem" demandPopin="true" minScreenWidth="Tablet">
-				<Label text="Zona" />
-			</Column>
+	<table:Table   
+				id="table"
+				 
+                            rows="{/tempList}"
+							selectionMode="Single"
+							selectionBehavior="Row"
+							rowSelectionChange="onSelectItem"	
+                            visibleRowCount="12"
+                            showColumnVisibilityMenu="{ui>/showVisibilityMenuEntry}"
+                            enableColumnFreeze="{ui>/showFreezeMenuEntry}"
+                            enableCellFilter="{ui>/enableCellFilter}"
+                            columnSelect="onColumnSelect"
+                            cellContextmenu="onProductIdCellContextMenu"
+                            ariaLabelledBy="title"
+							
+							>
+				<table:extension>
+					<OverflowToolbar style="Clear">
+						
+						<ObjectStatus
+								text="{/pageTable/text}" 
+								state="Warning"/>
+						<ToolbarSpacer/>
+                          
+						<ToolbarSeparator/>
+						<SearchField
+							placeholder="Búsqueda rápida"
+							value="{ui>/globalFilter}"
+							liveChange="onSearch"
+							width="15rem"/>
+					</OverflowToolbar>
+					
+				</table:extension>
+				<table:columns  editable="false">
+					<table:Column width="8rem"
+						sortProperty="CDPCN"
+						filterProperty="CDPCN"
+						showFilterMenuEntry="true"
+						showSortMenuEntry="true">
+						<table:label>
+							<Label text="Código"/>
+						</table:label>
+						<table:template>
+							<ObjectStatus text="{CDPCN}" state="Information" />
+						</table:template>
+					</table:Column>
 
-		</columns>
-		<items>
-			<ColumnListItem
-				type="Active"
-				press="onSelectItem">
-				<ObjectStatus 
-					text="{CDPCN}"
-					state="Information" />
-				<Text text="{DSPCN}" />
-				<Text text="{ path: 'FHITM'}" />
-				<Text text="{ path: 'FHFTM'}" />
-				<Text text="{
+
+					<table:Column width="24rem"
+						sortProperty="DSPCN"
+						filterProperty="DSPCN"
+						showFilterMenuEntry="true"
+						showSortMenuEntry="true">
+						<table:label>
+							<Label text="Descripción"/>
+						</table:label>
+						<table:template>
+							<Text text="{DSPCN}"/>
+						</table:template>
+					</table:Column>
+
+
+					<table:Column width="8rem"
+						sortProperty="FHITM"
+						filterProperty="FHITM"
+						showFilterMenuEntry="true"
+						showSortMenuEntry="true">
+						<table:label>
+							<Label text="Fecha inicio"/>
+						</table:label>
+						<table:template>
+							<Text text="{ path: 'FHITM'}" />
+						</table:template>
+					</table:Column>
+					
+					
+					<table:Column width="8rem"
+						sortProperty="FHFTM"
+						filterProperty="FHFTM"
+						showFilterMenuEntry="true"
+						showSortMenuEntry="true">
+						<table:label>
+							<Label text="Fecha fin"/>
+						</table:label>
+						<table:template>
+							<Text text="{ path: 'FHFTM'}" />
+						</table:template>
+					</table:Column>
+					
+					
+					<table:Column width="8rem"
+						sortProperty="CTNAC"
+						filterProperty="CTNAC"
+						showFilterMenuEntry="true"
+						showSortMenuEntry="true"
+						hAlign="End">
+						<table:label>
+							<Label text="Cuouta"/>
+						</table:label>
+						<table:template>
+							<Text text="{
 								path:'CTNAC',
 								type:'sap.ui.model.type.Integer',
 								formatOptions:{
@@ -114,8 +172,26 @@
 									groupingSeparator:','
 								}
 							}" />
-				<Text text="{ZDSZAR}" />
-			</ColumnListItem>
-		</items>
-	</Table> 
+						</table:template>
+					</table:Column>
+					
+					
+					<table:Column width="20rem"
+						sortProperty="ZDSZAR"
+						filterProperty="ZDSZAR"
+						showFilterMenuEntry="true"
+						showSortMenuEntry="true">
+						<table:label>
+							<Label text="Zona"/>
+						</table:label>
+						<table:template>
+							<Text text="{ZDSZAR}"/>
+						</table:template>
+					</table:Column>
+					<!--EMBACACION-->
+				</table:columns>
+
+
+
+			</table:Table>
 </mvc:View>
