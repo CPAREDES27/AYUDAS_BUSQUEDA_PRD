@@ -14,9 +14,9 @@ sap.ui.define([
 			onInit: function () {
 				let oModel = this.getOwnerComponent()._getPropertiesToPropagate().oModels.undefined;
 				if(!oModel){   // para caso 
-					oModel = this.getOwnerComponent()._getPropertiesToPropagate().oModels.Form;
+					oModel = this.getOwnerComponent()._getPropertiesToPropagate().oModels.DetalleMarea;
 				}
-				//let oModel = new sap.ui.model.json.JSONModel();
+				// let oModel = new sap.ui.model.json.JSONModel();
 				this.getView().setModel(oModel);
 				oModel.setProperty("/searchArma",{});
 			},
@@ -94,7 +94,7 @@ sap.ui.define([
 				this.getView().getModel().refresh(true);
 			},
 			onSelectItem:function(oEvent){
-				let oContext = oEvent.getSource().getBindingContext(),
+				let oContext = oEvent.getParameter("rowContext"),
 				oModel = oContext.getModel(),
 				helpArma = oModel.getProperty("/helpArma")||{},
 				oInput = oModel.getProperty("/input"),

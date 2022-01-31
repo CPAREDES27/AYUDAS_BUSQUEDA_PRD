@@ -22,7 +22,7 @@ sap.ui.define([
 				//let oModel = new sap.ui.model.json.JSONModel();
 				let oModel = this.getOwnerComponent()._getPropertiesToPropagate().oModels.undefined;
 				if(!oModel){   // para caso 
-					oModel = this.getOwnerComponent()._getPropertiesToPropagate().oModels.Form;
+					oModel = this.getOwnerComponent()._getPropertiesToPropagate().oModels.DetalleMarea;
 				}
 				this.getView().setModel(oModel);
 				oModel.setProperty("/searchEmbar",{});
@@ -34,7 +34,7 @@ sap.ui.define([
 			 */
 
 			onSelectItem:function(oEvent){
-				let oContext = oEvent.getSource().getBindingContext(),
+				let oContext = oEvent.getParameter("rowContext"),
 				oModel = oContext.getModel(),
 				help = oModel.getProperty("/help")||{},
 				oInput = oModel.getProperty("/input"),
