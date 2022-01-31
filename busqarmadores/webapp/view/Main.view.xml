@@ -4,7 +4,8 @@
     displayBlock="true"
     xmlns="sap.m"
 	xmlns:core = "sap.ui.core"
-	xmlns:form = "sap.ui.layout.form">
+	xmlns:form = "sap.ui.layout.form"
+	xmlns:table="sap.ui.table">
 	<VBox >
 		<items >
 			<form:Form 
@@ -83,43 +84,87 @@
 			</form:Form>
 			<ScrollContainer
 				height="50vh" vertical="true">
-				<Table  id="HelpTable"
-						items="{/tempList}"
-						growing="false"
-						growingScrollToLoad="false"
-						growingThreshold="50"
-						updateFinished="onUpdateTable">
-					<headerToolbar>
-						<OverflowToolbar>
-							<ObjectStatus id="idCantReg"
-								text="Cantidad de Registros: " 
-								state="Warning"/>
-						</OverflowToolbar>
-					</headerToolbar>
-					<columns>
-						<Column>
-							<Label text="Nro. cuenta del proveedor" />
-						</Column>
-						<Column>
-							<Label text="Descripción" />
-						</Column>
-						<Column>
-							<Label text="R.U.C" />
-						</Column>
+			<table:Table   
+				id="table"
+				 
+                            rows="{/tempList}"
+							selectionMode="Single"
+							selectionBehavior="Row"
+							rowSelectionChange="onSelectItem"	
+                             visibleRowCount="12"
+                            showColumnVisibilityMenu="{ui>/showVisibilityMenuEntry}"
+                            enableColumnFreeze="{ui>/showFreezeMenuEntry}"
+                            enableCellFilter="{ui>/enableCellFilter}"
+                            columnSelect="onColumnSelect"
+                            cellContextmenu="onProductIdCellContextMenu"
+                            ariaLabelledBy="title"
+							
+							>
+				<table:extension>
+					<OverflowToolbar style="Clear">
 						
-					</columns>
-					<items>
-						<ColumnListItem
-							type="Active"
-							press="onSelectItem">
-							<cells>
-								<Text text="{LIFNR}" />
-								<Text text="{NAME1}" />
-								<Text text="{STCD1}" />
-							</cells>
-						</ColumnListItem>
-					</items>
-				</Table>         
+						<ObjectStatus
+								id="idCantReg"
+								text="Lista de registros: "
+								state="Warning"/>
+						<ToolbarSpacer/>
+                          
+						<ToolbarSeparator/>
+						<SearchField
+							placeholder="Búsqueda rápida"
+							value="{ui>/globalFilter}"
+							liveChange="onSearch"
+							width="15rem"/>
+					</OverflowToolbar>
+					
+				</table:extension>
+				<table:columns  editable="false">
+					<table:Column width="12rem"
+						sortProperty="LIFNR"
+						filterProperty="LIFNR"
+						showFilterMenuEntry="true"
+						showSortMenuEntry="true">
+						<table:label>
+							<Label text="Nro. cuenta del proveedor"/>
+						</table:label>
+						<table:template>
+							<Text text="{LIFNR}"/>
+						</table:template>
+					</table:Column>
+
+
+					<table:Column width="22rem"
+						sortProperty="NAME1"
+						filterProperty="NAME1"
+						showFilterMenuEntry="true"
+						showSortMenuEntry="true">
+						<table:label>
+							<Label text="Descripcion"/>
+						</table:label>
+						<table:template>
+							<Text text="{NAME1}"/>
+						</table:template>
+					</table:Column>
+
+
+					<table:Column width="20rem"
+						sortProperty="STCD1"
+						filterProperty="STCD1"
+						showFilterMenuEntry="true"
+						showSortMenuEntry="true">
+						<table:label>
+							<Label text="Descripcion"/>
+						</table:label>
+						<table:template>
+							<Text text="{STCD1}"/>
+						</table:template>
+					</table:Column>
+					<!--EMBACACION-->
+				</table:columns>
+
+
+
+			</table:Table>
 			</ScrollContainer>
 		</items>
 	</VBox>

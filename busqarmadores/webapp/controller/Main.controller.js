@@ -1,11 +1,13 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/ui/core/BusyIndicator"
+	"sap/ui/core/BusyIndicator",
+	"sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
 ],
 	/**
 	 * @param {typeof sap.ui.core.mvc.Controller} Controller
 	 */
-	function (Controller,BusyIndicator) {
+	function (Controller,BusyIndicator,Filter,FilterOperator) {
 		"use strict";
 
 		return Controller.extend("busqarmadores.controller.Main", {
@@ -14,7 +16,7 @@ sap.ui.define([
 				if(!oModel){   // para caso 
 					oModel = this.getOwnerComponent()._getPropertiesToPropagate().oModels.DetalleMarea;
 				}
-				// let oModel = new sap.ui.model.json.JSONModel();
+				//let oModel = new sap.ui.model.json.JSONModel();
 				this.getView().setModel(oModel);
 				oModel.setProperty("/searchArma",{});
 			},
@@ -166,6 +168,24 @@ sap.ui.define([
 	
 				return `https://cf-nodejs-${servicioNode}.cfapps.us10.hana.ondemand.com`;
 			},
+			onSearch: function (oEvent) {
+				// add filter for search
+				var aFilters = [];
+				var sQuery = oEvent.getSource().getValue();
+				if (sQuery && sQuery.length > 0) {
+					var filter = new Filter([
+						new Filter("LIFNR", FilterOperator.Contains, sQuery),
+						new Filter("NAME1", FilterOperator.Contains, sQuery),
+						new Filter("STCD1", FilterOperator.Contains, sQuery)
+					]);
+					aFilters.push(filter);
+				}
+	
+				// update list binding
+				var oList = this.byId("table");
+				var oBinding = oList.getBinding("rows");
+				oBinding.filter(aFilters, "Application");
+			}
 			
 		});
 	});

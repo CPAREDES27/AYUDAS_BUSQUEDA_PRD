@@ -1,14 +1,16 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/core/BusyIndicator",
-	"sap/ui/model/json/JSONModel"
+	"sap/ui/model/json/JSONModel",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
 ],
 	/**
 	 * @param {typeof sap.ui.core.mvc.Controller} Controller
 	 */
 	function (Controller,
 	BusyIndicator,
-	JSONModel) {
+	JSONModel,Filter,FilterOperator) {
 		"use strict";
 
 		return Controller.extend("busqembarcaciones.controller.Main", {
@@ -464,5 +466,25 @@ sap.ui.define([
 	
 				return `https://cf-nodejs-${servicioNode}.cfapps.us10.hana.ondemand.com`;
 			},
+			onSearch: function (oEvent) {
+				// add filter for search
+				var aFilters = [];
+				var sQuery = oEvent.getSource().getValue();
+				if (sQuery && sQuery.length > 0) {
+					var filter = new Filter([
+						new Filter("CDEMB", FilterOperator.Contains, sQuery),
+						new Filter("MREMB", FilterOperator.Contains, sQuery),
+						new Filter("NMEMB", FilterOperator.Contains, sQuery),
+						new Filter("STCD1", FilterOperator.Contains, sQuery),
+						new Filter("NAME1", FilterOperator.Contains, sQuery)
+					]);
+					aFilters.push(filter);
+				}
+	
+				// update list binding
+				var oList = this.byId("table");
+				var oBinding = oList.getBinding("rows");
+				oBinding.filter(aFilters, "Application");
+			}
 		});
 	});
