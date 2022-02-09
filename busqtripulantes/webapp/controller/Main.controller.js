@@ -24,7 +24,7 @@ sap.ui.define([
 				oModelMaster.setProperty("/searchEmbar",{})
 			},
 			onSelectItem:function(oEvent){
-				let oContext = oEvent.getParameter("listItem").getBindingContext(),
+				let oContext = oEvent.getParameter("rowContext"),
 				
 				oModel = oContext.getModel(),
 				help = oModel.getProperty("/help")||{};

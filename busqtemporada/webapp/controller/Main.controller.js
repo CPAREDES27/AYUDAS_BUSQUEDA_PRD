@@ -24,7 +24,7 @@ sap.ui.define([
 			 * @param {event} oEvent 
 			 */
 			onSelectItem:function(oEvent){
-				let oContext = oEvent.getSource().getBindingContext(),
+				let oContext = oEvent.getParameter("rowContext"),
 				oModel = oContext.getModel(),
 				help = oModel.getProperty("/help")||{};
 				help.CDPCN = oContext.getProperty("CDPCN");
