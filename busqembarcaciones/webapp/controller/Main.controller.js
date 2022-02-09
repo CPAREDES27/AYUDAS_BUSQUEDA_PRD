@@ -68,6 +68,8 @@ sap.ui.define([
 					oInput.setValue(help.WERKS)
 				}else if(sId.split("_")[1] === "R"){
 					oInput.setValue(help.CDEMB)
+				}else if(sId.split("_")[3]==="M"){
+					oInput.setValue(help.MREMB)
 				}
 				this.close(oModel);
 			},
