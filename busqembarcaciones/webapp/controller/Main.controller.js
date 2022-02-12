@@ -38,7 +38,9 @@ sap.ui.define([
 				oModel = oContext.getModel(),
 				help = oModel.getProperty("/help")||{},
 				oInput = oModel.getProperty("/input"),
-				sId = oInput.getId();
+				sId;
+				
+				if(oInput) sId = oInput.getId();
 
 				help.CDEMB = oContext.getProperty("CDEMB");
 				help.CDEMP =  oContext.getProperty("CDEMP");

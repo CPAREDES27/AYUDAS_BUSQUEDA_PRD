@@ -98,7 +98,9 @@ sap.ui.define([
 				oModel = oContext.getModel(),
 				helpArma = oModel.getProperty("/helpArma")||{},
 				oInput = oModel.getProperty("/input"),
-				sId = oInput.getId();
+				sId;
+				
+				if(oInput) sId = oInput.getId();
 				
 				helpArma.LIFNR = oContext.getProperty("LIFNR");
 				helpArma.NAME1 = oContext.getProperty("NAME1");
