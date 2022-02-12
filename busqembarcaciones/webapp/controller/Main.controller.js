@@ -34,8 +34,9 @@ sap.ui.define([
 			 */
 
 			onSelectItem:function(oEvent){
-				let oContext = oEvent.getParameter("rowContext"),
-				oModel = oContext.getModel(),
+				let oContext = oEvent.getParameter("rowContext");
+				if(oContext){
+				let oModel = oContext.getModel(),
 				help = oModel.getProperty("/help")||{},
 				oInput = oModel.getProperty("/input"),
 				sId = oInput.getId();
@@ -72,6 +73,7 @@ sap.ui.define([
 					oInput.setValue(help.MREMB)
 				}
 				this.close(oModel);
+			}
 			},
 
 			onPressSearchEmbar:function(sPage){
@@ -209,7 +211,8 @@ sap.ui.define([
 				 })
 			},
 			keyPress:function(oEvent){
-				if(oEvent.mParameters.value!==""){
+				
+				if(oEvent.mParameters.value.trim()!==""){
 					this.onPressSearchEmbar();
 				}
 			},
@@ -461,7 +464,7 @@ sap.ui.define([
 				} else if (urlIntance.indexOf('tasaprd') !== -1) {
 					servicioNode = 'prd'; // apuntando a PRD
 				}else if(urlIntance.indexOf('localhost') !== -1){
-					servicioNode = 'cheerful-bat-js'; // apuntando a DEV
+					servicioNode = 'qas'; // apuntando a DEV
 				}else{
 					servicioNode = 'cheerful-bat-js'; // apuntando a DEV
 				}

@@ -94,8 +94,9 @@ sap.ui.define([
 				this.getView().getModel().refresh(true);
 			},
 			onSelectItem:function(oEvent){
-				let oContext = oEvent.getParameter("rowContext"),
-				oModel = oContext.getModel(),
+				let oContext = oEvent.getParameter("rowContext");
+				if(oContext){
+				let oModel = oContext.getModel(),
 				helpArma = oModel.getProperty("/helpArma")||{},
 				oInput = oModel.getProperty("/input"),
 				sId = oInput.getId();
@@ -115,6 +116,7 @@ sap.ui.define([
 					oInput.setValue(helpArma.LIFNR)
 				}
 				this.close(oModel);
+				}
 			},
 			
 			close:function(oModel){
@@ -143,7 +145,7 @@ sap.ui.define([
 				}
 			},
 			keyPress:function(oEvent){
-				if(oEvent.mParameters.value!==""){
+				if(oEvent.mParameters.value.trim()!==""){
 					this.onPressSearching();
 				}
 			},

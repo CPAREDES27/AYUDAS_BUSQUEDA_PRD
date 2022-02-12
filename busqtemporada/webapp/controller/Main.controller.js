@@ -38,7 +38,7 @@ sap.ui.define([
 				this.onClose(oModel);
 			},
 			keyPress:function(oEvent){
-				if(oEvent.mParameters.value!==""){
+				if(oEvent.mParameters.value.trim()!==""){
 					this.onPressSearching();
 				}
 			},
