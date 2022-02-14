@@ -51,7 +51,9 @@ sap.ui.define([
 				help.KUNNR = oContext.getProperty("KUNNR");
 				help.NAME1 = oContext.getProperty("NAME1");
 				help.INPRP = oContext.getProperty("INPRP");
-				help.NRTRI = oContext.getProperty("NRTRI"); 
+				help.NRTRI = oContext.getProperty("NRTRI");
+				help.DESC_INPRP = oContext.getProperty("DESC_INPRP");
+				help.LIFNR = oContext.getProperty("LIFNR");
 				
 				oModel.setProperty(`/help`,help);
 
