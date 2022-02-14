@@ -41,8 +41,7 @@ sap.ui.define([
 				oInput = oModel.getProperty("/input"),
 				sId;
 				
-				if(oInput) sId = oInput.getId();
-
+				
 				help.CDEMB = oContext.getProperty("CDEMB");
 				help.CDEMP =  oContext.getProperty("CDEMP");
 				help.MREMB = oContext.getProperty("MREMB");
@@ -54,7 +53,7 @@ sap.ui.define([
 				help.NRTRI = oContext.getProperty("NRTRI"); 
 				
 				oModel.setProperty(`/help`,help);
-
+				
 				// Modelo con nombre
 				oModel.setProperty("/Form/CDEMB",oContext.getProperty("CDEMB"));
 				oModel.setProperty("/Form/NAME1",oContext.getProperty("CDEMP"));
@@ -64,16 +63,20 @@ sap.ui.define([
 				oModel.setProperty("/Form/NAME1",oContext.getProperty("NAME1"));
 				oModel.setProperty("/Form/CDEMP",oContext.getProperty("INPRP"));
 				oModel.setProperty("/Form/NMEMB",oContext.getProperty("NMEMB"));
-
+				
 				oModel.setProperty("/EmbaItem",oContext.getObject());
-
-				if(sId.split("_")[1] === "W"){
-					oInput.setValue(help.WERKS)
-				}else if(sId.split("_")[1] === "R"){
-					oInput.setValue(help.CDEMB)
-				}else if(sId.split("_")[3]==="M"){
-					oInput.setValue(help.MREMB)
-				}
+				
+				if(oInput) {
+					sId = oInput.getId();
+					if(sId.split("_")[1] === "W"){
+						oInput.setValue(help.WERKS)
+					}else if(sId.split("_")[1] === "R"){
+						oInput.setValue(help.CDEMB)
+					}else if(sId.split("_")[3]==="M"){
+						oInput.setValue(help.MREMB)
+					}
+				} 
+				
 				this.close(oModel);
 			}
 			},

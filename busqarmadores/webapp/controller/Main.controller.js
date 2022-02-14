@@ -101,12 +101,11 @@ sap.ui.define([
 				oInput = oModel.getProperty("/input"),
 				sId;
 				
-				if(oInput) sId = oInput.getId();
 				
 				helpArma.LIFNR = oContext.getProperty("LIFNR");
 				helpArma.NAME1 = oContext.getProperty("NAME1");
 				helpArma.STCD1 = oContext.getProperty("STCD1");
-
+				
 				// Modelo con nombre
 				oModel.setProperty("/Form/CDEMP",oContext.getProperty("LIFNR"));
 				oModel.setProperty("/Form/NAME1",oContext.getProperty("NAME1"));
@@ -114,9 +113,12 @@ sap.ui.define([
 				oModel.setProperty("/Form/NAME1",oContext.getProperty("NAME1"));
 				// console.log(helpArma);
 				oModel.setProperty("/helpArma",helpArma);
-				if(sId.split("_")[1] === "R"){
-					oInput.setValue(helpArma.LIFNR)
-				}
+				if(oInput) {
+					sId = oInput.getId();
+					if(sId.split("_")[1] === "R"){
+						oInput.setValue(helpArma.LIFNR)
+					}
+				} 
 				this.close(oModel);
 				}
 			},
