@@ -196,15 +196,15 @@
 					</table:Column>
 
 					<table:Column width="20rem"
-						sortProperty="STELL"
-						filterProperty="STELL"
+						sortProperty="DESC_STELL"
+						filterProperty="DESC_STELL"
 						showFilterMenuEntry="true"
 						showSortMenuEntry="true">
 						<table:label>
 							<Label text="Función"/>
 						</table:label>
 						<table:template>
-							<Text text="{STELL}"/>
+							<Text text="{DESC_STELL}"/>
 						</table:template>
 					</table:Column>
 					<!--EMBACACION-->

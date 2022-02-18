@@ -2,24 +2,16 @@
     "_version": "1.32.0",
     "sap.app": {
         "id": "busqusuarios",
-        "type": "application",
+        "type": "component",
         "i18n": "i18n/i18n.properties",
         "applicationVersion": {
-            "version": "0.0.1"
+            "version": "1.0.0"
         },
         "title": "{{appTitle}}",
         "description": "{{appDescription}}",
-        "dataSources": {
-            "mainService": {
-                "uri": "/sap/opu/odata/",
-                "type": "OData",
-                "settings": {
-                    "annotations": [],
-                    "localUri": "localService/metadata.xml",
-                    "odataVersion": "4.0"
-                }
-            }
-        }
+        "resources": "resources.json",
+        "ach": "ach",
+        "embeddedBy": "../"
     },
     "sap.ui": {
         "technology": "UI5",
@@ -39,10 +31,18 @@
     },
     "sap.ui5": {
         "flexEnabled": true,
+        "rootView": {
+            "viewName": "busqusuarios.view.Main",
+            "type": "XML",
+            "async": true,
+            "id": "Main"
+        },
         "dependencies": {
-            "minUI5Version": "1.98.0",
+            "minUI5Version": "1.96.0",
             "libs": {
-                "sap.ui.core": {}
+                "sap.ui.core": {},
+                "sap.m": {},
+                "sap.ui.layout": {}
             }
         },
         "contentDensities": {
@@ -54,17 +54,6 @@
                 "type": "sap.ui.model.resource.ResourceModel",
                 "settings": {
                     "bundleName": "busqusuarios.i18n.i18n"
-                }
-            },
-            "": {
-                "dataSource": "mainService",
-                "preload": true,
-                "settings": {
-                    "synchronizationMode": "None",
-                    "operationMode": "Server",
-                    "autoExpandSelect": true,
-                    "earlyRequests": true,
-                    "groupId": "$direct"
                 }
             }
         },
@@ -103,12 +92,6 @@
                     "viewName": "Main"
                 }
             }
-        },
-        "rootView": {
-            "viewName": "busqusuarios.view.Main",
-            "type": "XML",
-            "async": true,
-            "id": "Main"
         }
     },
     "sap.cloud": {
