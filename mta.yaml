@@ -63,6 +63,10 @@ modules:
       - busqsemana.zip
       name: busqsemana
       target-path: resources/
+    - artifacts:
+      - busqusuarios.zip
+      name: busqusuarios
+      target-path: resources/
 - name: busqembarcaciones
   type: html5
   path: busqembarcaciones
@@ -106,6 +110,16 @@ modules:
 - name: busqsemana
   type: html5
   path: busqsemana
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: busqusuarios
+  type: html5
+  path: busqusuarios
   build-parameters:
     build-result: dist
     builder: custom
