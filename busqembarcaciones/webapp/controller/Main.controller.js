@@ -19,11 +19,15 @@ sap.ui.define([
 			 * ciclo de vida del controlador
 			 */
 			onInit: function () {
-				//let oModel = new sap.ui.model.json.JSONModel();
+				// let oModel = new sap.ui.model.json.JSONModel();
 				let oModel = this.getOwnerComponent()._getPropertiesToPropagate().oModels.undefined;
 				if(!oModel){   // para caso 
 					oModel = this.getOwnerComponent()._getPropertiesToPropagate().oModels.DetalleMarea;
+					if(!oModel){
+						oModel= this.getOwnerComponent()._getPropertiesToPropagate().oModels.TrabajoDetail;
+					}
 				}
+				this.onCargarDominio();
 				this.getView().setModel(oModel);
 				oModel.setProperty("/searchEmbar",{});
 			},
@@ -33,6 +37,31 @@ sap.ui.define([
 			 * @param {*} oEvent 
 			 */
 
+			 onCargarDominio: function(){
+				BusyIndicator.show(0);
+					var ZINPRP=null;
+					var body={
+						"dominios": [
+						  {
+							"domname": "ZINPRP",
+							"status": "A"
+						  }
+						]
+					}
+					fetch(`${this.getHostService()}/api/dominios/Listar`,
+					  {
+						  method: 'POST',
+						  body: JSON.stringify(body)
+					  })
+					  .then(resp => resp.json()).then(data => {
+						ZINPRP = data.data.find(d => d.dominio == "ZINPRP").data;
+						this.getView().getModel().setProperty("/INPRP",ZINPRP);
+						BusyIndicator.hide();
+						
+						
+					  }).catch(error => console.log(error)
+					  );
+			},
 			onSelectItem:function(oEvent){
 				let oContext = oEvent.getParameter("rowContext");
 				if(oContext){
@@ -53,7 +82,7 @@ sap.ui.define([
 				help.NRTRI = oContext.getProperty("NRTRI");
 				help.DESC_INPRP = oContext.getProperty("DESC_INPRP");
 				help.LIFNR = oContext.getProperty("LIFNR");
-				
+				console.log(help.CDEMB);
 				oModel.setProperty(`/help`,help);
 				
 				// Modelo con nombre
@@ -76,6 +105,8 @@ sap.ui.define([
 						oInput.setValue(help.CDEMB)
 					}else if(sId.split("_")[3]==="M"){
 						oInput.setValue(help.MREMB)
+					}else if(sId.split("_")[3]==="R"){
+						oInput.setValue(help.CDEMB)
 					}
 				} 
 				
@@ -172,9 +203,15 @@ sap.ui.define([
 				let oContext = oEvent.getSource().getBindingContext(),
 				oModelMaster = oContext.getModel();
 				oModelMaster.setProperty("/searchEmbar",{})
+				this.getView().getModel().setProperty("/dataEmbarcaciones/data",{});
+				this.getView().getModel().setProperty("/pageTable/text",);
+				
 			},
 	
+
 			onUpdateTable:function(oEvent){
+				// let oTotal = oEvent.getSource().getBinding().iLength,
+				// oActual = oEvent.getSource().getBinding().iLength,
 				let oTotal = oEvent.getParameter("total"),
 				oActual = oEvent.getParameter("actual"),
 				oModel =this.getView().getModel(),
@@ -182,7 +219,7 @@ sap.ui.define([
 				sTotalPag;
 				if(oTotal>0){
 					sPage = oModel.getProperty("/pageTable")["page"];
-					sTotalPag = oModel.getProperty("/dataEmbarcaciones")["p_totalpag"];
+				
 					this.addPagination("HelpTable",sTotalPag,sPage);
 				}
 			},
@@ -193,9 +230,14 @@ sap.ui.define([
 			 */
 
 			close:function(oModel){
+				
 				let idDialog = oModel.getProperty("/idDialogComp"),
 				oControl = sap.ui.getCore().byId(idDialog);
 				oControl.close();
+				var table  =this.byId("table");
+				var data = this.getView().getModel().getProperty("/dataEmbarcaciones");
+				table.setSelectedIndex(-1);
+				
 			},
 
 			getDataSearchHelp:function(oService){
@@ -208,14 +250,19 @@ sap.ui.define([
 				oDataUpdate.then(res=>res.json())
 				 .then(data=>{
 					oModel.setProperty("/dataEmbarcaciones",data);
+					
 					oModel.setProperty("/pageTable",{
 						text:`Página ${oService.param.p_pag} de ${data.p_totalpag}`,
 						page:oService.param.p_pag
 					});
+					let sTotalPag = oModel.getProperty("/dataEmbarcaciones")["p_totalpag"];
+					let sPage = oModel.getProperty("/pageTable")["page"];
+					this.addPagination("HelpTable",sTotalPag,sPage)
 					 BusyIndicator.hide();
 					// this.mFragments["NewMaster"].getControl().close();
 					// this.getMessageDialog("Success",data.dsmin);
 				 })
+			
 			},
 			keyPress:function(oEvent){
 				
@@ -494,7 +541,7 @@ sap.ui.define([
 				}
 	
 				// update list binding
-				var oList = this.byId("table");
+				var oList = this.byId("HelpTable");
 				var oBinding = oList.getBinding("rows");
 				oBinding.filter(aFilters, "Application");
 			}

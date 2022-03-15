@@ -118,20 +118,19 @@
 			<ScrollContainer
 				height="50vh" vertical="true">
 				<table:Table   
-				id="table"
-				 
+							id="HelpTable"
                             rows="{/dataEmbarcaciones/data}"
 							selectionMode="Single"
 							selectionBehavior="Row"
 							rowSelectionChange="onSelectItem"	
-                             visibleRowCount="12"
+                            visibleRowCount="12"
                             showColumnVisibilityMenu="{ui>/showVisibilityMenuEntry}"
                             enableColumnFreeze="{ui>/showFreezeMenuEntry}"
                             enableCellFilter="{ui>/enableCellFilter}"
                             columnSelect="onColumnSelect"
                             cellContextmenu="onProductIdCellContextMenu"
                             ariaLabelledBy="title"
-							
+						
 							>
 				<table:extension>
 					<OverflowToolbar style="Clear">
