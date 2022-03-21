@@ -510,20 +510,22 @@ sap.ui.define([
 			 * @returns url service 
 			 */
 			getHostService: function () {
-				var urlIntance = window.location.origin,
+				let urlIntance = window.location.origin,
 				servicioNode ; 
-	
-				if (urlIntance.indexOf('tasaqas') !== -1) {
+
+				if (urlIntance.indexOf('tasacalidad') !== -1) {
 					servicioNode = 'qas'; // aputando a QAS
-				} else if (urlIntance.indexOf('tasaprd') !== -1) {
+				} else if (urlIntance.indexOf('tasaproduccion') !== -1) {
 					servicioNode = 'prd'; // apuntando a PRD
 				}else if(urlIntance.indexOf('localhost') !== -1){
-					servicioNode = 'qas'; // apuntando a DEV
+					// servicioNode = 'cheerful-bat-js'; // apuntando a DEV
+					servicioNode = 'qas'; // aputando a QAS
 				}else{
-					servicioNode = 'cheerful-bat-js'; // apuntando a DEV
+					// servicioNode = 'cheerful-bat-js'; // apuntando a DEV
+					servicioNode = 'qas'; // aputando a QAS
 				}
-	
-				return `https://cf-nodejs-${servicioNode}.cfapps.us10.hana.ondemand.com`;
+
+				return `https://node-flota-${servicioNode}.cfapps.us10.hana.ondemand.com`;
 			},
 			onSearch: function (oEvent) {
 				// add filter for search
