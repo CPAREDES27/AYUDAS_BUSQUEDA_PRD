@@ -82,7 +82,6 @@ sap.ui.define([
 				help.NRTRI = oContext.getProperty("NRTRI");
 				help.DESC_INPRP = oContext.getProperty("DESC_INPRP");
 				help.LIFNR = oContext.getProperty("LIFNR");
-				console.log(help.CDEMB);
 				oModel.setProperty(`/help`,help);
 				
 				// Modelo con nombre
@@ -229,15 +228,18 @@ sap.ui.define([
 			 * @param {*} oModel 
 			 */
 
-			close:function(oModel){
-				
-				let idDialog = oModel.getProperty("/idDialogComp"),
-				oControl = sap.ui.getCore().byId(idDialog);
+			close:function(oParam){
+				let idDialog = oParam.getProperty("/idDialogComp"),
+				oControl;
+				if(idDialog){
+					oControl = sap.ui.getCore().byId(idDialog);
+				} else {
+					oControl = oParam.getSource().getParent();
+				}
 				oControl.close();
-				var table  =this.byId("table");
-				var data = this.getView().getModel().getProperty("/dataEmbarcaciones");
-				table.setSelectedIndex(-1);
-				
+				let oTable  =this.byId("HelpTable");
+				// var data = this.getView().getModel().getProperty("/dataEmbarcaciones");
+				oTable.setSelectedIndex(-1);
 			},
 
 			getDataSearchHelp:function(oService){
