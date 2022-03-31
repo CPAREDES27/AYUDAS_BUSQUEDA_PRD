@@ -1,7 +1,6 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/core/BusyIndicator",
-	"sap/ui/model/json/JSONModel",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 ],
@@ -10,7 +9,8 @@ sap.ui.define([
 	 */
 	function (Controller,
 	BusyIndicator,
-	JSONModel,Filter,FilterOperator) {
+	Filter,
+	FilterOperator) {
 		"use strict";
 
 		return Controller.extend("busqembarcaciones.controller.Main", {
@@ -39,8 +39,8 @@ sap.ui.define([
 
 			 onCargarDominio: function(){
 				BusyIndicator.show(0);
-					var ZINPRP=null;
-					var body={
+					let ZINPRP=null,
+					oBody={
 						"dominios": [
 						  {
 							"domname": "ZINPRP",
@@ -51,7 +51,7 @@ sap.ui.define([
 					fetch(`${this.getHostService()}/api/dominios/Listar`,
 					  {
 						  method: 'POST',
-						  body: JSON.stringify(body)
+						  body: JSON.stringify(oBody)
 					  })
 					  .then(resp => resp.json()).then(data => {
 						ZINPRP = data.data.find(d => d.dominio == "ZINPRP").data;
