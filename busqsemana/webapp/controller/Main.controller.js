@@ -9,6 +9,7 @@ sap.ui.define([
 		var anioActual="";
 		var oGlobalBusyDialog = new sap.m.BusyDialog();
 		var anioBefore="";
+		var anioLater="";	//Solo QAS (para que tome el 2023)
 		var arrayAnios=[];
 		var usuario="";
 		return Controller.extend("busqsemana.controller.Main", {
@@ -22,6 +23,7 @@ sap.ui.define([
 				var date = new Date();
 				this.anioActual=date.getFullYear();
 				this.anioBefore=date.getFullYear()-1;
+				this.anioLater=date.getFullYear()+1;
 				var array=[];
 				array.push({
 					id: 1,
@@ -29,7 +31,8 @@ sap.ui.define([
 				},
 				{
 					id:2,
-					anio:this.anioBefore
+					//anio:this.anioBefore
+					anio:this.anioLater //Solo QAS
 				}); 
 			
 				this.getView().getModel("Anio").setProperty("/listaAnio",array);
@@ -65,7 +68,16 @@ sap.ui.define([
 					this.getView().getModel().setProperty("/listaSemana", "");
 					this.getView().getModel().refresh(true);	
 					this.getView().getModel().setProperty("/listaSemana",arrayAnios.listAñoActual);
-				}else{
+				}
+				//Solo QAS inicio
+				else if(anio===this.anioLater.toString()){
+
+					this.getView().getModel().setProperty("/listaSemana", "");
+					this.getView().getModel().refresh(true);	
+					this.getView().getModel().setProperty("/listaSemana",arrayAnios.listAñoSiguiente);
+				}
+				//Solo QAS prd fin
+				else{
 					this.getView().getModel().setProperty("/listaSemana", "");	
 					this.getView().getModel().refresh(true);	
 
