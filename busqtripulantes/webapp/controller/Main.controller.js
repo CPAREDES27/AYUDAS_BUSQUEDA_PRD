@@ -106,6 +106,16 @@ sap.ui.define([
 						}
 					)
 				}
+
+				aOptions.push(
+					{
+						cantidad: "1",
+						control: "COMBOBOX",
+						key: "PERSG",
+						valueHigh: "",
+						valueLow: "1"
+					}
+				)
 				
 				// CDPCN
 				// DSPCN
